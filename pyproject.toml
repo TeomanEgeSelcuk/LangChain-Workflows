@@ -1,0 +1,41 @@
+[tool.poetry]  # Poetry configuration section
+name = "langchain-env"  # Name of the project
+version = "0.1.0"  # Version of the project
+description = "A language processing toolchain"  # Description of the project
+authors = ["Teoman Selcuk"]  # List of authors
+# package-mode = false  # Disable package mode
+
+[tool.poetry.dependencies]
+# Specify the Python version range
+python = ">=3.10.0,<3.12"  # Python 3.10.x (inclusive) up to but not including 3.12
+
+# Langchain dependencies
+langchain-core = "^0.2.0"  # Langchain Core 0.2.x (inclusive)
+langchain-openai = "^0.1.7"  # Langchain OpenAI 0.1.x (inclusive)
+langchain = "^0.2.0"  # Langchain 0.2.x (inclusive)
+langchain-groq = "^0.1.0"  # Langchain Groq 0.1.x (inclusive)
+backoff = "^2.2.1"  # Backoff 2.2.x (inclusive), used for API failure management
+tiktoken = "^0.7.0"  # Tiktoken 0.7.x (inclusive), used for BPE tokenizing text for LLMs
+pandas = "^2.2.2"  # Pandas 2.2.x (inclusive), used for data manipulation and analysis
+
+markdown = "^3.6"
+[tool.poetry.group.dev.dependencies]
+deepeval = "^0.21.43" # DeepEval 0.21.x (inclusive)
+pytest = "^6.2.5"  # Testing framework  6.2.x (inclusive)
+prettyprint = "^0.1.5"  # Used for pretty printing JSON data 0.1.x inclusive
+
+[tool.pyright]  # Configuration for the Pyright static type checker
+useLibraryCodeForTypes = true  # Use library code for type inference
+exclude = [".cache"]  # Exclude the ".cache" directory from type checking
+
+[build-system]  # Build system configuration
+requires = ["poetry-core>=1.0.0"]  # Required version of poetry-core
+build-backend = "poetry.core.masonry.api"  # Build backend for Poetry
+
+[[tool.poetry.packages]]
+include = "langchain_env" # Package configuration for the langchain_env package
+
+[tool.pytest.ini_options]
+# Specify additional paths to be added to sys.path
+# "langchain_env" and "tests" directories will be included in the Python path when running pytest
+python_paths = ["langchain_env", "tests"]
