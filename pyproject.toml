@@ -15,9 +15,7 @@ langchain-openai = "^0.1.7"  # Langchain OpenAI 0.1.x (inclusive)
 langchain = "^0.2.0"  # Langchain 0.2.x (inclusive)
 langchain-groq = "^0.1.0"  # Langchain Groq 0.1.x (inclusive)
 backoff = "^2.2.1"  # Backoff 2.2.x (inclusive), used for API failure management
-tiktoken = "^0.7.0"  # Tiktoken 0.7.x (inclusive), used for BPE tokenizing text for LLMs
-pandas = "^2.2.2"  # Pandas 2.2.x (inclusive), used for data manipulation and analysis
-markdown = "^3.6" # Markdown 3.6.x (inclusive), used for creating markdown files and elements
+mdutils = "^1.6.0" # Mdutils 1.6.x (inclusive), used for creating markdown files and elements within markdown files
 
 [tool.poetry.group.dev.dependencies]
 deepeval = "^0.21.43" # DeepEval 0.21.x (inclusive)
