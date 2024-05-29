@@ -6,9 +6,20 @@ from langchain_groq import ChatGroq
 api_keys = {
     'openai': os.environ.get('OPENAI_API_KEY'),
     'groq': os.environ.get('GROQ_API_KEY'),
+    'openrouter': os.environ.get('OPENROUTER_API_KEY'), 
     # Add more providers as needed
     # 'provider_name': os.environ.get('PROVIDER_API_KEY'),
 }
+# Define a class for ChatOpenRouter
+class ChatOpenRouter(ChatOpenAI):
+    def __init__(self,
+                 model: str,
+                 openai_api_key: str = api_keys['openrouter'],
+                 openai_api_base: str = "https://openrouter.ai/api/v1",
+                 **kwargs):
+        super().__init__(openai_api_base=openai_api_base,
+                         openai_api_key=openai_api_key,
+                         model_name=model, **kwargs)
 
 # Define a dictionary of prompts for different task types
 PROMPTS = {
@@ -17,15 +28,18 @@ PROMPTS = {
 
 # Define a dictionary to map engines to their default models
 default_models = {
-'groq': 'llama3-70b-8192',
-'openai': 'gpt-3.5-turbo-1106'
+'openai': 'gpt-3.5-turbo-0125',
+'groq': 'llama3-8b-8192',
+'openrouter': 'nousresearch/nous-capybara-34b',
 }
 
 # Define a dictionary to map engines to their corresponding classes
 engine_classes = {
 'groq': ChatGroq,
-'openai': ChatOpenAI
+'openrouter': ChatOpenRouter, 
+'openai': ChatOpenAI,
 }
+
 
 '''
 • RPM: Requests Per Minute. The number of requests you can make to the model per minute.

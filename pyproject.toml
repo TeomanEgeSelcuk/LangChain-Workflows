@@ -9,7 +9,7 @@ authors = ["Teoman Selcuk"]  # List of authors
 # Specify the Python version range
 python = ">=3.10.0,<3.12"  # Python 3.10.x (inclusive) up to but not including 3.12
 
-# Langchain dependencies
+# Dependencies
 langchain-core = "^0.2.0"  # Langchain Core 0.2.x (inclusive)
 langchain-openai = "^0.1.7"  # Langchain OpenAI 0.1.x (inclusive)
 langchain = "^0.2.0"  # Langchain 0.2.x (inclusive)
@@ -17,8 +17,8 @@ langchain-groq = "^0.1.0"  # Langchain Groq 0.1.x (inclusive)
 backoff = "^2.2.1"  # Backoff 2.2.x (inclusive), used for API failure management
 tiktoken = "^0.7.0"  # Tiktoken 0.7.x (inclusive), used for BPE tokenizing text for LLMs
 pandas = "^2.2.2"  # Pandas 2.2.x (inclusive), used for data manipulation and analysis
+markdown = "^3.6" # Markdown 3.6.x (inclusive), used for creating markdown files and elements
 
-markdown = "^3.6"
 [tool.poetry.group.dev.dependencies]
 deepeval = "^0.21.43" # DeepEval 0.21.x (inclusive)
 pytest = "^6.2.5"  # Testing framework  6.2.x (inclusive)

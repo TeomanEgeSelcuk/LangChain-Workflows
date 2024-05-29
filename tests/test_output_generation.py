@@ -91,11 +91,11 @@ correctness_metric = GEval(
         "Vague language, or contradicting OPINIONS, are OK"
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT, LLMTestCaseParams.CONTEXT],
-    threshold=0.45, model="gpt-4o"
+    threshold=0.45, model="gpt-3.5-turbo-0125"
 )
 
 # Define the summarization metric
-summarization_metric = SummarizationMetric(threshold=0.5, model="gpt-4o", assessment_questions=[
+summarization_metric = SummarizationMetric(threshold=0.5, model="gpt-3.5-turbo-0125", assessment_questions=[
     "Is the coverage score based on a percentage of 'yes' answers?",
     "Does the score ensure the summary's accuracy with the source?",
     "Does a higher score mean a more comprehensive summary?"
@@ -103,34 +103,33 @@ summarization_metric = SummarizationMetric(threshold=0.5, model="gpt-4o", assess
 
 
 # NOTE: Rate limits may exceed and the outputs might cause an error due to the API restrictions.
-# Evaluate test cases for OpenAI gpt-3.5 model
-print("Evaluating OpenAI gpt-3.5 model:")
-results_gpt35 = generate_output(tasks=functions_test_cases, engine="openai")
-test_case_gpt35 = generate_test_cases(results_gpt35)
-scoreOutput = evaluate(test_case_gpt35, [correctness_metric, summarization_metric])
-print(scoreOutput.score)
-print(scoreOutput.reason)
 
-# Evaluate test cases for OpenAI gpt-4o model
-print("Evaluating OpenAI gpt-4o model:")
-results_gpt4o = generate_output(tasks=functions_test_cases, engine="openai", model_name='gpt-4o')
-test_case_gpt4o = generate_test_cases(results_gpt4o)
-scoreOutput= evaluate(test_case_gpt4o, [correctness_metric, summarization_metric])
-print(scoreOutput.score)
-print(scoreOutput.reason)
+# Evaluate test cases for OpenRouter default model (nousresearch/nous-capybara-34b)
+print("Evaluating OpenRouter default model (nousresearch/nous-capybara-34b):")
+results_openrouter_default = generate_output(tasks=functions_test_cases, engine="openrouter")
+test_case_openrouter_default = generate_test_cases(results_openrouter_default)
+score_output_openrouter_default = evaluate(test_case_openrouter_default, [correctness_metric, summarization_metric])
 
-# Evaluate test cases for Groq Llama3-70b-8192
-print("Evaluating Groq Llama3-70b-8192 model:")
-results_llama3_8b = generate_output(tasks=functions_test_cases, engine="groq")
-test_case_llama3_8b = generate_test_cases(results_llama3_8b)
-scoreOutput = evaluate(test_case_llama3_8b, [correctness_metric, summarization_metric])
-print(scoreOutput.score)
-print(scoreOutput.reason)
+# Evaluate test cases for OpenRouter phi-3-mini-128k-instruct model:
+print("Evaluating OpenRouter phi-3-mini-128k-instruct model:")
+results_phi3mini = generate_output(tasks=functions_test_cases, engine="openrouter", model_name='microsoft/phi-3-mini-128k-instruct')
+test_case_phi3mini = generate_test_cases(results_phi3mini)
+score_output_phi3mini = evaluate(test_case_phi3mini, [correctness_metric, summarization_metric])
 
-# Evaluate test cases for Groq Llama3-8b-8192
-print("Evaluating Groq llama3-8b-8192 model:")
-results_mixtral_8x7b = generate_output(tasks=functions_test_cases, engine="groq", model_name='llama3-8b-8192')
-test_case_mixtral_8x7b = generate_test_cases(results_mixtral_8x7b)
-scoreOutput = evaluate(test_case_mixtral_8x7b, [correctness_metric, summarization_metric])
-print(scoreOutput.score)
-print(scoreOutput.reason)
+# Evaluate test cases for Groq gemma-7b-it model
+print("Evaluating Groq gemma-7b-it model:")
+results_gemma7b = generate_output(tasks=functions_test_cases, engine="groq", model_name='gemma-7b-it')
+test_case_gemma7b = generate_test_cases(results_gemma7b)
+score_output_gemma7b = evaluate(test_case_gemma7b, [correctness_metric, summarization_metric])
+
+# Evaluate test cases for Groq default model (llama3-8b-8192)
+print("Evaluating Groq default model (llama3-8b-8192):")
+results_groq_default = generate_output(tasks=functions_test_cases, engine="groq")
+test_case_groq_default = generate_test_cases(results_groq_default)
+score_output_groq_default = evaluate(test_case_groq_default, [correctness_metric, summarization_metric])
+
+# Evaluate test cases for OpenAI default model (gpt-3.5-turbo-0125)
+print("Evaluating OpenAI default model (gpt-3.5-turbo-0125):")
+results_openai_default = generate_output(tasks=functions_test_cases, engine="openai")
+test_case_openai_default = generate_test_cases(results_openai_default)
+score_output_openai_default = evaluate(test_case_openai_default, [correctness_metric, summarization_metric])

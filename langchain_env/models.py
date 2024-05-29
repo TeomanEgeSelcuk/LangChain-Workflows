@@ -1,4 +1,6 @@
 from langchain_core.pydantic_v1 import BaseModel, Field
+from langchain_community.chat_models import ChatOpenAI
+import os 
 
 # Define the default Pydantic model
 class SummarizeModel(BaseModel):

@@ -26,7 +26,7 @@ def generate_output(engine: str = 'groq', model_name: str = None, pydantic_objec
     parser = JsonOutputParser(pydantic_object=pydantic_object)
 
     if tasks is None:
-        tasks = [("Summarize", "The ingredients for a Margherita pizza are tomatoes, onions, cheese, basil")]
+        raise ValueError("The 'tasks' parameter cannot be None.")
 
     # If model_name is not provided, set it based on the engine
     model_name = model_name or default_models.get(engine)
@@ -35,9 +35,11 @@ def generate_output(engine: str = 'groq', model_name: str = None, pydantic_objec
     model_class = engine_classes.get(engine)
     if model_class:
         model = model_class(model=model_name, temperature=0.7)
+    else:
+        raise ValueError(f"Unsupported engine: {engine}")
 
     # Initialize the OutputFixingParser with the JSON output parser
-    parser = OutputFixingParser.from_llm(parser=parser, llm=model, max_retries=2)
+    parser = OutputFixingParser.from_llm(parser=parser, llm=model, max_retries=3)
 
     results = []
 

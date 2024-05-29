@@ -30,7 +30,7 @@ To use this project, follow these steps:
 4. Activate the newly created environment:
 
    ```
-   conda activate langchain_env
+   conda activate langchain-env
    ```
 5. Set up API keys for various providers by setting environment variables:
 

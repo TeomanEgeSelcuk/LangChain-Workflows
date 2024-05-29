@@ -1,10 +1,37 @@
 import pytest
+import os 
 from langchain_env.input_processing import read_input, process_input
+from langchain_env.file_operations import save_as_markdown
 
 def test_read_input():
-    # Assuming there's a test file in the Input-Output directory
+    # Define the expected results
+    results = [
+        ("Summarize", "This is task 1 content", {"title": "Task 1 Title", "text": "Task 1 Summary"})
+    ]
+
+    # Define the filename for the test file
+    filename = "test_reading_input.md"
+    
+    # Save the results to a markdown file
+    save_as_markdown(results, filename)
+
+    # Get the current working directory
+    dir_path = os.getcwd()
+    
+    # Construct the full path to the test file
+    file_path = os.path.join(dir_path, 'Input-Output', filename)
+
+    # Create the directory if it does not exist
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    # Read the input from a test file (assuming it exists in the Input-Output directory)
     content = read_input('input.md')
+    
+    # Assert that the read_input function returns a string
     assert isinstance(content, str), "read_input should return a string"
+
+    # Remove the test file after the test
+    os.remove(file_path)
 
 def test_process_input():
     # Test with only task types, no content

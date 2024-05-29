@@ -25,7 +25,7 @@ def main():
     input_text = read_input(input_filename)  # Read input from the input file
     tasks = process_input(input_text)  # Process the input text to extract tasks
     # Generate output using the chosen engine. Engine is not mandatory to be passed as an argument, defaults to groq.
-    # Options for engine: 'openai' or 'groq'. Set it like this: engine='groq' or engine='openai'. 
+    # Options for engine: 'openrouter' or 'groq'. Set it like this: engine='groq' or engine='openrouter'. 
     results = generate_output(tasks) 
     save_as_markdown(results, output_filename)  # Save the results to the output file
 
